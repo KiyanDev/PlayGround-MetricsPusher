@@ -1,0 +1,6 @@
+@PlayGround_MetricsPusher_HostAddress = http://localhost:5217
+
+GET {{PlayGround_MetricsPusher_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
