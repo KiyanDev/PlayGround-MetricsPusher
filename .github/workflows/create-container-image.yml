@@ -48,4 +48,6 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ghcr.io/kiyandev/playground-metricspusher:${{ github.sha }}
+          tags: |
+            ghcr.io/kiyandev/playground-metricspusher:${{ github.sha }}
+            ghcr.io/kiyandev/playground-metricspusher:latest
