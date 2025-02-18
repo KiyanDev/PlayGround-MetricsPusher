@@ -21,8 +21,9 @@ builder.Services.AddOpenTelemetry()
         .AddOtlpExporter(options =>
         {
             options.Endpoint = new Uri(otelEndpoint);
-            options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+            options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
         }))
+
     .WithMetrics(metricsProviderBuilder => metricsProviderBuilder
         .AddMeter("PlaygroundMetricsPusher")
         .AddAspNetCoreInstrumentation()
@@ -30,7 +31,7 @@ builder.Services.AddOpenTelemetry()
         .AddOtlpExporter(options =>
         {
             options.Endpoint = new Uri(otelEndpoint);
-            options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+            options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
         }));
 
 builder.Logging.AddOpenTelemetry(loggingOptions =>
@@ -41,7 +42,7 @@ builder.Logging.AddOpenTelemetry(loggingOptions =>
     loggingOptions.AddOtlpExporter(options =>
     {
         options.Endpoint = new Uri(otelEndpoint);
-        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
     });
 });
 
