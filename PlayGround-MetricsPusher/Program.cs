@@ -6,7 +6,7 @@ using PlayGround_MetricsPusher;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string otelEndpoint = "http://otel-collector:55681"; // Uses the K8s service name
+string otelEndpoint = "http://otel-collector:4317"; // Uses the K8s service name
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -21,9 +21,8 @@ builder.Services.AddOpenTelemetry()
         .AddOtlpExporter(options =>
         {
             options.Endpoint = new Uri(otelEndpoint);
-            options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+            options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
         }))
-
     .WithMetrics(metricsProviderBuilder => metricsProviderBuilder
         .AddMeter("PlaygroundMetricsPusher")
         .AddAspNetCoreInstrumentation()
@@ -31,7 +30,7 @@ builder.Services.AddOpenTelemetry()
         .AddOtlpExporter(options =>
         {
             options.Endpoint = new Uri(otelEndpoint);
-            options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+            options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
         }));
 
 builder.Logging.AddOpenTelemetry(loggingOptions =>
@@ -42,7 +41,7 @@ builder.Logging.AddOpenTelemetry(loggingOptions =>
     loggingOptions.AddOtlpExporter(options =>
     {
         options.Endpoint = new Uri(otelEndpoint);
-        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
     });
 });
 
