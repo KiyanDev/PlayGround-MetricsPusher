@@ -47,6 +47,11 @@ builder.Logging.AddOpenTelemetry(loggingOptions =>
 
 builder.Services.AddHostedService<TelemetryWorker>();
 
+builder.Configuration.AddKeyPerFile(
+    directoryPath: "/mnt/config",
+    optional: true,
+    reloadOnChange: true);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
